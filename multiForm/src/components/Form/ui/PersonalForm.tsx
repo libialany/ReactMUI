@@ -4,10 +4,7 @@ import { FormInputText } from "../../FormComponents/FormInputText";
 import { DataFormularioType } from "../types/FormType";
 import { forwardRef, useImperativeHandle } from "react";
 import { useFormData } from "../../../context/FormDataContext";
-const defaultValues = {
-  restaurantName: "",
-  address: "",
-};
+
 export interface PersonalFormRef {
   validate: () => void;
 }
@@ -19,8 +16,13 @@ function PersonalForm(
   props: PropsComponente,
   ref: React.Ref<unknown | undefined>
 ) {
-  const { setStoreName } = useFormData();
+  const { setStoreName, dataStore } = useFormData();
   ///
+  const defaultValues = {
+    restaurantName: dataStore?.restaurantName,
+    address: dataStore?.address,
+  };
+  //
   useImperativeHandle(
     ref,
     (): PersonalFormRef => ({
@@ -32,7 +34,7 @@ function PersonalForm(
   );
   ///
   const onSubmitForm = (data: DataFormularioType) => {
-    console.log('Personal Form>',data);
+    console.log("Personal Form>", data);
     setStoreName(data);
     props.nextForm();
   };
@@ -49,7 +51,11 @@ function PersonalForm(
       }}
     >
       <Typography variant="h4">Name Store:</Typography>
-      <FormInputText name="restaurantName" control={control} label="Text Input" />
+      <FormInputText
+        name="restaurantName"
+        control={control}
+        label=""
+      />
     </Paper>
   );
 }

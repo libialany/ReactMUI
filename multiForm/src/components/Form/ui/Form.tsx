@@ -11,6 +11,7 @@ import {
   StepLabel,
   Button,
   CircularProgress,
+  Grid,
 } from "@mui/material";
 import { AddressFormRef } from "./AddressForm";
 import AddressForm from "./AddressForm";
@@ -74,23 +75,40 @@ export default function Form() {
         {activeStep === steps.length ? (
           <CheckoutSuccess />
         ) : (
-          <>
-            {renderStepContent(activeStep)}
-            <div>
-              {activeStep !== 0 && <Button onClick={handleBack}>Back</Button>}
+          <Grid
+            container
+            sx={{ display: "flex", flexDirection: "column" }}
+            rowSpacing={2}
+          >
+            <Grid item>{renderStepContent(activeStep)}</Grid>
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {activeStep !== 0 && (
+                <Button sx={{ m: 2 }} onClick={handleBack}>
+                  Back
+                </Button>
+              )}
               <div>
                 <Button
+                  sx={{ m: 2 }}
                   disabled={isSubmitting}
                   variant="contained"
                   color="primary"
                   onClick={arrForms[activeStep].action}
                 >
-                  {isLastStep ? "Place order" : "Next"}
+                  {isLastStep ? "Search" : "Next"}
                 </Button>
                 {isSubmitting && <CircularProgress size={24} />}
               </div>
-            </div>
-          </>
+            </Grid>
+          </Grid>
         )}
       </React.Fragment>
     </React.Fragment>
