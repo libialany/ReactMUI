@@ -15,14 +15,13 @@ import {
 } from "@mui/material";
 import { AddressFormRef } from "./AddressForm";
 import AddressForm from "./AddressForm";
-const steps = ["Shipping address", "Payment details", "Review your order"];
+const steps = ["Personal Data", "Address", "Review your data"];
 
 export default function Form() {
   const refPersonalForm = useRef<PersonalFormRef>();
   const refAddressForm = useRef<AddressFormRef>();
   const [activeStep, setActiveStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  //const currentValidationSchema = validationSchema[activeStep];
   const isLastStep = activeStep === steps.length - 1;
   const nextForm = () => {
     if (isLastStep) {
@@ -49,12 +48,6 @@ export default function Form() {
   const renderStepContent = (step: number) => {
     return arrForms[step].component;
   };
-  //   async function _submitForm(values, actions) {
-  //     await delay(1000);
-  //     alert(JSON.stringify(values, null, 2));
-  //     actions.setSubmitting(false);
-  //     setActiveStep(activeStep + 1);
-  //   }
   function handleBack() {
     setActiveStep(activeStep - 1);
   }
@@ -64,7 +57,7 @@ export default function Form() {
       <Typography component="h1" variant="h4" align="center">
         Checkout
       </Typography>
-      <Stepper activeStep={activeStep}>
+      <Stepper sx={{ p: 2, m: 2 }} activeStep={activeStep}>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>

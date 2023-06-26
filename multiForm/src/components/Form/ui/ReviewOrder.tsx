@@ -13,6 +13,7 @@ function ReviewOrder() {
           gridRowGap: "20px",
           padding: "20px",
           margin: "10px 300px",
+          borderBottom: '4px  solid #264BA3'
         }}
       >
         <Typography variant="h3" gutterBottom>
